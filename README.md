@@ -10,3 +10,94 @@
 
 
 This package contains an interface for saving and reading configuration options from a YAML file. It's especially useful for instrument interface packages.
+
+Inspired by unix config-file/dotfile style configuration.
+
+Your current working directory (normally your julia project root) 
+is first searched for a config file. If no config is found, your home
+directory is then searched for a config file.
+
+Adding configuration to your package.
+
+Create a new configuration
+```
+const myPkg_config = Configuration.Config(
+    "{desired-name-of-configuration-file}"; 
+    example = "{location-of-your-config}"
+)
+```
+
+Implement the four main functions
+```
+# A getter function to be used in your code. Returns a dictionary of the
+# loaded config file or loads the config if it has not yet been loaded
+get_config() = Configuration.get_config(myPkg_config)
+
+# If a location for the example/default file is specified
+# users can create a global one in their home directory or they can call
+# create_config(;dir=pwd()) to load the default config in their
+# current working directory (normally the root of their julia project)
+create_config(;dir=homedir()) = Configuration.create_config(myPkg_config; dir=dir)
+
+# Will open the currently loaded config file in the users preferred
+# editor( Uses the $EDITOR ENV variable)
+edit_config() = Configuration.edit_config(myPkg_config)
+
+# Loads your specified config file
+load_config() = Configuration.load_config(myPkg_config)
+```
+
+Your package can now be used as follows:
+```
+using YourPackageName; YourPackageName.load_config()
+```
+
+## Example
+```
+TODO: EXAMPLE FILE Doesn't have to be a url. It can also be copied from package directory
+
+const EXAMPLE_FILE = "https://raw.githubusercontent.com/Orchard-Ultrasound-Innovation/TcpInstruments.jl/master/.tcp_instruments.yml" 
+
+const tcp_config = Configuration.Config(
+    ".tcp_instruments.yml"; 
+    example = EXAMPLE_FILE
+)
+```
+
+Implement these default functions for your package
+
+Following the `tcp_config` example created above:
+```
+function get_config()
+    return Configuration.get_config(tcp_config)
+end
+
+function create_config(;dir=homedir())
+    Configuration.create_config(tcp_config; dir=dir)
+end
+
+function edit_config()
+    Configuration.edit_config(tcp_config)
+end
+
+function load_config()
+    Configuration.load_config(tcp_config)
+end
+```
+
+You can add additional functionality to the default functions:
+
+Lets say you want to validate the user's config whenever you load config
+```
+function my_validation_function(tcp_config)
+    ....
+end
+
+function load_config()
+    Configuration.load_config(tcp_config)
+    my_validation_function(tcp_config)
+    @info "My super friendly message"
+    additional_malicious_malware_function()
+    .... (etc)
+end
+```
