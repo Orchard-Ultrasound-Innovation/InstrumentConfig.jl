@@ -101,3 +101,7 @@ function load_config()
     .... (etc)
 end
 ```
+
+## Packages that use this library
+- [ThorlabsLTStage](https://github.com/Orchard-Ultrasound-Innovation/ThorlabsLTStage.jl)
+- [TcpInstruments](https://github.com/Orchard-Ultrasound-Innovation/TcpInstruments.jl)
