@@ -21,7 +21,7 @@ Adding configuration to your package.
 
 Create a new configuration
 ```
-const myPkg_config = Configuration.Config(
+const myPkg_config = InstrumentConfig.Config(
     "{desired-name-of-configuration-file}"; 
     example = "{location-of-your-config}"
 )
@@ -31,20 +31,20 @@ Implement the four main functions
 ```
 # A getter function to be used in your code. Returns a dictionary of the
 # loaded config file or loads the config if it has not yet been loaded
-get_config() = Configuration.get_config(myPkg_config)
+get_config() = InstrumentConfig.get_config(myPkg_config)
 
 # If a location for the example/default file is specified
 # users can create a global one in their home directory or they can call
 # create_config(;dir=pwd()) to load the default config in their
 # current working directory (normally the root of their julia project)
-create_config(;dir=homedir()) = Configuration.create_config(myPkg_config; dir=dir)
+create_config(;dir=homedir()) = InstrumentConfig.create_config(myPkg_config; dir=dir)
 
 # Will open the currently loaded config file in the users preferred
 # editor( Uses the $EDITOR ENV variable)
-edit_config() = Configuration.edit_config(myPkg_config)
+edit_config() = InstrumentConfig.edit_config(myPkg_config)
 
 # Loads your specified config file
-load_config() = Configuration.load_config(myPkg_config)
+load_config() = InstrumentConfig.load_config(myPkg_config)
 ```
 
 Your package can now be used as follows:
@@ -58,7 +58,7 @@ TODO: EXAMPLE FILE Doesn't have to be a url. It can also be copied from package 
 
 const EXAMPLE_FILE = "https://raw.githubusercontent.com/Orchard-Ultrasound-Innovation/TcpInstruments.jl/master/.tcp_instruments.yml" 
 
-const tcp_config = Configuration.Config(
+const tcp_config = InstrumentConfig.Config(
     ".tcp_instruments.yml"; 
     example = EXAMPLE_FILE
 )
@@ -69,19 +69,19 @@ Implement these default functions for your package
 Following the `tcp_config` example created above:
 ```
 function get_config()
-    return Configuration.get_config(tcp_config)
+    return InstrumentConfig.get_config(tcp_config)
 end
 
 function create_config(;dir=homedir())
-    Configuration.create_config(tcp_config; dir=dir)
+    InstrumentConfig.create_config(tcp_config; dir=dir)
 end
 
 function edit_config()
-    Configuration.edit_config(tcp_config)
+    InstrumentConfig.edit_config(tcp_config)
 end
 
 function load_config()
-    Configuration.load_config(tcp_config)
+    InstrumentConfig.load_config(tcp_config)
 end
 ```
 
@@ -94,7 +94,7 @@ function my_validation_function(tcp_config)
 end
 
 function load_config()
-    Configuration.load_config(tcp_config)
+    InstrumentConfig.load_config(tcp_config)
     my_validation_function(tcp_config)
     @info "My super friendly message"
     additional_malicious_malware_function()
