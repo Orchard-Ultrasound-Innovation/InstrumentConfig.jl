@@ -6,7 +6,7 @@ DocMeta.setdocmeta!(InstrumentConfig, :DocTestSetup, :(using InstrumentConfig); 
 makedocs(;
     modules=[InstrumentConfig],
     authors="Morten F. Rasmussen <10264458+mofii@users.noreply.github.com> and contributors",
-    repo="https://github.com/mofii/InstrumentConfig.jl/blob/{commit}{path}#{line}",
+    repo="https://github.com/Orchard-Ultrasound-Innovation/InstrumentConfig.jl/blob/{commit}{path}#{line}",
     sitename="InstrumentConfig.jl",
     format=Documenter.HTML(;
         prettyurls=get(ENV, "CI", "false") == "true",
@@ -19,5 +19,6 @@ makedocs(;
 )
 
 deploydocs(;
-    repo="github.com/mofii/InstrumentConfig.jl",
+    repo="github.com/Orchard-Ultrasound-Innovation/InstrumentConfig.jl",
+    devbranch="main",
 )
