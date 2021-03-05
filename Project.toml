@@ -1,7 +1,7 @@
 name = "InstrumentConfig"
 uuid = "2ae464b0-21de-4247-9233-e7c17725eb53"
 authors = ["Esti Gajda", "Morten F. Rasmussen <10264458+mofii@users.noreply.github.com> and contributors"]
-version = "0.2.0"
+version = "0.2.1"
 
 [deps]
 YAML = "ddb6d928-2868-570f-bddf-ab3f9cf99eb6"
