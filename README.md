@@ -17,7 +17,14 @@ Your current working directory (normally your julia project root)
 is first searched for a config file. If no config is found, your home
 directory is then searched for a config file.
 
-Adding configuration to your package.
+## Installation
+TcpInstruments can be installed using the Julia package manager. From the Julia REPL, type ] to enter the Pkg REPL mode and run
+
+```julia
+pkg> add InstrumentConfig
+```
+
+## Usage
 
 Create a new configuration
 ```
