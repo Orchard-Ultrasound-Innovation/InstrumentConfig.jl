@@ -25,7 +25,12 @@ pkg> add InstrumentConfig
 ```
 
 ## Usage
+### Instrument Functions
+This library exports the `initialize` and `terminate`
+functions so that they can be overridden and implemented
+in other packages.
 
+### Configuration
 Create a new configuration
 ```
 const myPkg_config = InstrumentConfig.Config(
