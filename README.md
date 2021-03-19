@@ -32,7 +32,7 @@ in other packages.
 
 ### Configuration
 Create a new configuration
-```
+```julia
 const myPkg_config = InstrumentConfig.Config(
     "{desired-name-of-configuration-file}"; 
     example = "{location-of-your-config}"
@@ -40,7 +40,7 @@ const myPkg_config = InstrumentConfig.Config(
 ```
 
 Implement the four main functions
-```
+```julia
 # A getter function to be used in your code. Returns a dictionary of the
 # loaded config file or loads the config if it has not yet been loaded
 get_config() = InstrumentConfig.get_config(myPkg_config)
@@ -60,12 +60,12 @@ load_config() = InstrumentConfig.load_config(myPkg_config)
 ```
 
 Your package can now be used as follows:
-```
+```julia
 using YourPackageName; YourPackageName.load_config()
 ```
 
 ## Example
-```
+```julia
 TODO: EXAMPLE FILE Doesn't have to be a url. It can also be copied from package directory
 
 const EXAMPLE_FILE = "https://raw.githubusercontent.com/Orchard-Ultrasound-Innovation/TcpInstruments.jl/master/.tcp_instruments.yml" 
@@ -79,7 +79,7 @@ const tcp_config = InstrumentConfig.Config(
 Implement these default functions for your package
 
 Following the `tcp_config` example created above:
-```
+```julia
 function get_config()
     return InstrumentConfig.get_config(tcp_config)
 end
@@ -100,7 +100,7 @@ end
 You can add additional functionality to the default functions:
 
 Lets say you want to validate the user's config whenever you load config
-```
+```julia
 function my_validation_function(tcp_config)
     ....
 end
