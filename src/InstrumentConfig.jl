@@ -22,13 +22,25 @@ mutable struct Config
        dot.loaded_file = ""
        return dot
    end
+
+   function Config(name, mod; example = name)
+       pkg_dir = dirname(dirname(pathof(mod)))
+       example_path = joinpath(pkg_dir, example)
+       return Config(name; example=example_path)
+   end
 end
 
 function create_config(config; dir=homedir())
+    file_path = joinpath(dir, config.name)
+    # Local
+    if !("http" in config.example)
+        run(`cp $(config.example) $(file_path)`)
+        load_config(config)
+        return
+    end
     if Sys.iswindows()
         error("create_config() is not supported on windows yet")
     end
-    file_path = joinpath(dir, config.name)
     if isempty(config.example)
         @info """
         No example config specified creating empty config file at:
