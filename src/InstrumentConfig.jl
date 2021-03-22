@@ -33,7 +33,7 @@ end
 function create_config(config; dir=homedir())
     file_path = joinpath(dir, config.name)
     # Local
-    if !("http" in config.example)
+    if !occursin("http", config.example)
         run(`cp $(config.example) $(file_path)`)
         load_config(config)
         return
