@@ -54,7 +54,7 @@ function create_config(config; dir=homedir())
 end
 
 function edit_config(config)
-    @assert config.config != nothing """
+    config.config == nothing && error("""
     No config loaded.
     Cannot edit a config file that doesn't exists.
 
@@ -64,7 +64,7 @@ function edit_config(config)
     Or
 
     To load the latest config use the create_config function
-    """
+    """)
     editor, file = ENV["EDITOR"], config.loaded_file
     if Sys.iswindows()
         Base.run(`powershell "$editor $file"`)
