@@ -32,10 +32,54 @@ in other packages.
 
 ### Configuration
 Create a new configuration
+```
+
 ```julia
 const myPkg_config = InstrumentConfig.Config(
-    "{desired-name-of-configuration-file}"; 
-    example = "{location-of-your-config}"
+    "{desired-name-of-configuration-file}",
+)
+```
+
+If you want to automatically package an example/default config you
+can do so like this:
+```julia
+julia>touch "desired-name.yml"
+shell>const myPkg_config = InstrumentConfig.Config(
+    "desired-name.yml",
+    @__MODULE__
+)
+```
+Your config must be in the root folder and have the same config name.
+
+
+If your config is not in the root of your project but in say your
+src folder or somewhere else:
+```julia
+julia>touch "src/desired-name.yml"
+shell>const myPkg_config = InstrumentConfig.Config(
+    "desired-name.yml",
+    @__MODULE__;
+    example="src/desired-name.yml"
+)
+```
+
+Or you might want to have your default config file have a different
+name:
+```julia
+julia>touch "example_desired_config.yml"
+shell>const myPkg_config = InstrumentConfig.Config(
+    "desired-name.yml",
+    @__MODULE__;
+    example="src/my-example-desired-name.yml"
+)
+```
+Or if your config is hosted somewhere on the internet
+```julia
+const EXAMPLE_FILE = "https://raw.githubusercontent.com/Orchard-Ultrasound-Innovation/TcpInstruments.jl/master/.tcp_instruments.yml" 
+
+const tcp_config = InstrumentConfig.Config(
+    ".tcp_instruments.yml";
+    example = EXAMPLE_FILE
 )
 ```
 
@@ -65,14 +109,15 @@ using YourPackageName; YourPackageName.load_config()
 ```
 
 ## Example
+
+The `.tcp_instruments.yml` file in your project root will be used
+as the default. So `create_config()` will create that file
+instead of an empty file.
+
 ```julia
-TODO: EXAMPLE FILE Doesn't have to be a url. It can also be copied from package directory
-
-const EXAMPLE_FILE = "https://raw.githubusercontent.com/Orchard-Ultrasound-Innovation/TcpInstruments.jl/master/.tcp_instruments.yml" 
-
 const tcp_config = InstrumentConfig.Config(
-    ".tcp_instruments.yml"; 
-    example = EXAMPLE_FILE
+    ".tcp_instruments.yml",
+    @__MODULE__
 )
 ```
 
