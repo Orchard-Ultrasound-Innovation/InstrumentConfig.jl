@@ -103,9 +103,9 @@ function get_config(config)
 end
 
 initialize(instr) =
-    @info "Initialize not implemented for $(typeof(instr))"
+    error("Initialize not implemented for $(typeof(instr))")
 
 terminate(instr) = 
-    @info "Terminate not implemented for $(typeof(instr))"
+    error("Terminate not implemented for $(typeof(instr))")
 
 end
