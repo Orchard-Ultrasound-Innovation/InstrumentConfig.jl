@@ -24,7 +24,8 @@ mutable struct Config
    end
 
    function Config(name, mod; example = name)
-       pkg_dir = dirname(dirname(pathof(mod)))
+       module_path = pathof(mod)
+       pkg_dir = isnothing(module_path) ? pwd() : dirname(dirname(module_path))
        example_path = joinpath(pkg_dir, example)
        return Config(name; example=example_path)
    end
