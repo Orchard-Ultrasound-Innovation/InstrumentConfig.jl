@@ -1,5 +1,7 @@
 module InstrumentConfig
 
+using Downloads
+
 export
     initialize,
     terminate
@@ -39,9 +41,6 @@ function create_config(config; dir=homedir())
         load_config(config)
         return
     end
-    if Sys.iswindows()
-        error("create_config() is not supported on windows yet")
-    end
     if isempty(config.example)
         @info """
         No example config specified creating empty config file at:
@@ -49,7 +48,7 @@ function create_config(config; dir=homedir())
         """
         Base.run(`touch $file_path`)
     else
-        Base.run(`wget -q --show-progress -O $file_path $(config.example)`)
+        Downloads.download(config.example, file_path)
     end
     load_config(config)
 end
