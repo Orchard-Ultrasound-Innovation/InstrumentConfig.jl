@@ -37,7 +37,11 @@ function create_config(config; dir=homedir())
     file_path = joinpath(dir, config.name)
     # Local
     if !occursin("http", config.example)
-        run(`cp $(config.example) $(file_path)`)
+        if Sys.iswindows()
+            run(`powershell cp $(config.example) $(file_path)`)
+        else
+            run(`cp $(config.example) $(file_path)`)
+        end
         load_config(config)
         return
     end
