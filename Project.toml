@@ -4,6 +4,7 @@ authors = ["Esti Gajda", "Morten F. Rasmussen <10264458+mofii@users.noreply.gith
 version = "0.2.5"
 
 [deps]
+Downloads = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
 YAML = "ddb6d928-2868-570f-bddf-ab3f9cf99eb6"
 
 [compat]
